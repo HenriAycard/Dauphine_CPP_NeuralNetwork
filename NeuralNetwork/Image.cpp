@@ -13,6 +13,7 @@
 #include <exception>
 
 #define path_file "/Users/henriaycard/Downloads/MNIST_training/"
+const int sizePixel = 748;
 using namespace std;
 
 
@@ -82,7 +83,7 @@ void Image::readPixel(int indice) {
         int i = 0;
         if (inputFile.is_open()) {
             inputFile.seekg(1078 * sizeof(char));
-            for (i = 0; i < 784; i++) {
+            for (i = 0; i < sizePixel; ++i) {
                 inputFile.read((char *)&grey_level, sizeof(unsigned char));
                 string value = to_string(grey_level);
                 this->pixel[i] = stod(value);
@@ -105,7 +106,7 @@ void Image::readPixel(int indice) {
  */
 double Image::operator[](int indice)
 {
-    if (indice >= 0 && indice <= 784) {
+    if (indice >= 0 && indice <= sizePixel) {
         return(this->pixel[indice]);
     }
     else {
@@ -116,7 +117,7 @@ double Image::operator[](int indice)
 void Image::printPixel()
 {
     cout << "Affichage des pixels" << endl;
-    for (int i = 0; i < 784; i++) {
+    for (int i = 0; i < sizePixel; ++i) {
         cout << this->pixel[i] <<endl;
     }
 }

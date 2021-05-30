@@ -14,10 +14,12 @@
 #include "Iris.hpp"
 #include "NN1.hpp"
 
-template <class T, int size, class N> class Apprentissage
+template <class T, int size, class N>
+class Apprentissage
 {
 private:
     N * neural_network;
+    
 public:
     Apprentissage();
 
@@ -43,7 +45,7 @@ template<class T, int size, class N>
 void Apprentissage<T, size, N>::apprendre_base(int K, double mu)
 {
     if (K >= 1) {
-        for (int i = 0; i < K; i++) {
+        for (int i = 0; i < K; ++i) {
             int rand_number = rand() % size;
             T input = T(rand_number);
             (this->neural_network)->apprentissage(input, mu);
@@ -54,18 +56,24 @@ void Apprentissage<T, size, N>::apprendre_base(int K, double mu)
     }
 }
 
+/**
+ @brief La fonction evaluer n'a pas de paramètre et retourne un entier correspondant au nombre d'inputs de
+ la base pour lesquels le réseau de neurones a fait une bonne classification (c'est a dire, a retourné le label
+ correspondant à l'inpu). Cette fonction devra évaluer le label de chaque input de la base (150 pour les fleurs et
+ 60 000 pour les images) et comparer ce label avec celui de l'input
+ */
 template<class T, int size, class N>
 int Apprentissage<T, size, N>::evaluer()
 {
-    int good_classif = 0;
-    for (int i = 0; i < size; i++) {
-        T input = T(i);
+    int nbreEvaluate = 0;
+    for (int index = 0; index < size; ++index) {
+        T input = T(index);
         char label_file = input.get_label();
         char label_evalue = (this->neural_network)->evaluation(input) - 48;
         if (label_evalue == label_file) {
-            good_classif += 1;
+            nbreEvaluate += 1;
         }
     }
-    return good_classif;
+    return nbreEvaluate;
 }
 #endif /* Apprentissage_hpp */
