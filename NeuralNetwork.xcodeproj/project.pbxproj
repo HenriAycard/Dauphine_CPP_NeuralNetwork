@@ -15,6 +15,9 @@
 		83149B7F25F27836004E40D1 /* Tanh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83149B7D25F27836004E40D1 /* Tanh.cpp */; };
 		83149B8225F279C8004E40D1 /* Sigmoide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83149B8025F279C8004E40D1 /* Sigmoide.cpp */; };
 		83149B8525F27BEE004E40D1 /* NN1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83149B8325F27BEE004E40D1 /* NN1.cpp */; };
+		832055412663B62400017D83 /* NN2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8320553F2663B62400017D83 /* NN2.cpp */; };
+		832055442663B6B100017D83 /* PerceptronCachee.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832055422663B6B100017D83 /* PerceptronCachee.cpp */; };
+		832055472663B85D00017D83 /* InputIntermediaire.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 832055452663B85D00017D83 /* InputIntermediaire.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +51,12 @@
 		83149B8325F27BEE004E40D1 /* NN1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NN1.cpp; sourceTree = "<group>"; };
 		83149B8425F27BEE004E40D1 /* NN1.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NN1.hpp; sourceTree = "<group>"; };
 		83149B8725F27CCB004E40D1 /* Apprentissage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Apprentissage.hpp; sourceTree = "<group>"; };
+		8320553F2663B62400017D83 /* NN2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NN2.cpp; sourceTree = "<group>"; };
+		832055402663B62400017D83 /* NN2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NN2.hpp; sourceTree = "<group>"; };
+		832055422663B6B100017D83 /* PerceptronCachee.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PerceptronCachee.cpp; sourceTree = "<group>"; };
+		832055432663B6B100017D83 /* PerceptronCachee.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PerceptronCachee.hpp; sourceTree = "<group>"; };
+		832055452663B85D00017D83 /* InputIntermediaire.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InputIntermediaire.cpp; sourceTree = "<group>"; };
+		832055462663B85D00017D83 /* InputIntermediaire.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InputIntermediaire.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +105,12 @@
 				83149B8025F279C8004E40D1 /* Sigmoide.cpp */,
 				83149B8325F27BEE004E40D1 /* NN1.cpp */,
 				83149B8425F27BEE004E40D1 /* NN1.hpp */,
+				8320553F2663B62400017D83 /* NN2.cpp */,
+				832055402663B62400017D83 /* NN2.hpp */,
+				832055422663B6B100017D83 /* PerceptronCachee.cpp */,
+				832055432663B6B100017D83 /* PerceptronCachee.hpp */,
+				832055452663B85D00017D83 /* InputIntermediaire.cpp */,
+				832055462663B85D00017D83 /* InputIntermediaire.hpp */,
 				83149B8725F27CCB004E40D1 /* Apprentissage.hpp */,
 			);
 			path = NeuralNetwork;
@@ -158,9 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				832055472663B85D00017D83 /* InputIntermediaire.cpp in Sources */,
 				83149B7F25F27836004E40D1 /* Tanh.cpp in Sources */,
 				83149B7825F2713F004E40D1 /* Iris.cpp in Sources */,
 				83149B7C25F277CC004E40D1 /* Perceptron.cpp in Sources */,
+				832055412663B62400017D83 /* NN2.cpp in Sources */,
+				832055442663B6B100017D83 /* PerceptronCachee.cpp in Sources */,
 				83149B7525F269D7004E40D1 /* Image.cpp in Sources */,
 				83149B7225F267FF004E40D1 /* Input.cpp in Sources */,
 				83149B8525F27BEE004E40D1 /* NN1.cpp in Sources */,

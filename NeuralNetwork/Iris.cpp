@@ -35,7 +35,7 @@ Iris::Iris(int indiceFleur) :Input()
                On veut spliter les données en un tableau de string
                Format desctabchar       : [5.9 ; 3 ; 5.1 ; 1.8 ; "Iris-setosa"]
             */
-            for (int i = 0;i < 5;i++) {
+            for (int i = 0;i < 5; ++i) {
                 desctabchar[i] = descriptionString.substr(0, descriptionString.find(delimiter));
                 // On supprime le resultat trouvé (délimiteur inclus) pour procéder aux extractions suivantes
                 descriptionString.erase(0, descriptionString.find(delimiter) + 1);
