@@ -23,11 +23,12 @@ using namespace std;
  */
 Image::Image(int imageIndice)
 {
-    if (imageIndice <= 59999 && imageIndice >= 0) {
+    // cout << "Path: " << path_file << " Pour modifier, changer la variable path_file du fichier Iris.cpp" << endl;
+    if (imageIndice >= 0 && imageIndice <= 59999) {
         this->readLabel(imageIndice);
         this->readPixel(imageIndice);
     } else {
-        throw "Invalid parameter : imageIndice";
+        throw "Error : Invalid parameter imageIndice n est pas compris entre 0 et 59999";
     }
 }
 
@@ -58,7 +59,7 @@ void Image::readLabel(int indice) {
             inputFile.close();
         }
         else {
-            cout << "impossible d'ouvrir le fichier" << endl;
+            cout << "Error : Impossible d'ouvrir le fichier" << endl;
         }
 
         this->set_label(to_string(static_cast<unsigned>(label))[0]);
@@ -91,7 +92,7 @@ void Image::readPixel(int indice) {
             inputFile.close();
         }
         else {
-            cout << "impossible d'ouvrir le fichier" << endl;
+            cout << "Error : Impossible d'ouvrir le fichier" << endl;
         }
     }
     catch (exception& e) {

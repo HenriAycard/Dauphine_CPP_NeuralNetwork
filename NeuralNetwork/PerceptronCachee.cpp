@@ -62,7 +62,7 @@ double PerceptronCachee::calcul_delta(Input & input)
     }
     
     // Calcule de la primitive
-    prim = this->fonction_activation->prim(sommeWX);
+    prim = this->fonctionActivation->prim(sommeWX);
     
     valueDelta = prim * sommeDeltaW;
     

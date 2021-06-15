@@ -14,19 +14,20 @@
 using namespace std;
 
 /**
- @param input_size : correspond à la taille de l'input (par exemple, 4 pour les fleurs et 784 pour les images)
- @param fnc_activation : un pointeur pour avoir une même fonction d'activation commune à tous les perceptrons
+ @param inputSize : correspond à la taille de l'input (par exemple, 4 pour les fleurs et 784 pour les images)
+ @param fonctionActivation : un pointeur pour avoir une même fonction d'activation commune à tous les perceptrons
  @param label : correspond au label du perceptron
  @brief Le constructeur initialise les poids du perceptron de manière aléatoire (par exemple en choisissant des valeurs
  entières entre -1 et 1 aléatoirement.
  */
-Perceptron::Perceptron(int input_size, FonctionActivation * fnc_activation, char label)
+Perceptron::Perceptron(int inputSize, FonctionActivation * fonctionActivation, char label)
 {
-    this->fonction_activation = fnc_activation;
+    this->fonctionActivation = fonctionActivation;
     this->label = label;
     this->delta = 0;
-    this->poids = (double *)malloc(input_size * sizeof(double));
-    for (int i=0; i<=input_size; i++)
+    // Une erreur peut etre déclenché lors du malloc : Incorrect checksum for freed object
+    this->poids = (double *) malloc(inputSize * sizeof(double));
+    for (int i=0; i<=inputSize; i++)
     {
         this->poids[i] = rand() % 2 - 1;
     }
@@ -66,7 +67,7 @@ double Perceptron::forward(Input & input)
         somme += this->get_poids(i+1) * input[i];
         i = i + 1;
     }
-    return (*this->fonction_activation)(somme);
+    return (*this->fonctionActivation)(somme);
 }
 
 double Perceptron::calcul_delta(Input & input)
@@ -84,7 +85,7 @@ double Perceptron::calcul_delta(Input & input)
         i = i + 1;
     }
 
-    delta = (this->fonction_activation->prim(somme)) * (a_x - y);
+    delta = (this->fonctionActivation->prim(somme)) * (a_x - y);
     this->delta = delta;
     return this->delta;
 }

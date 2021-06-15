@@ -10,7 +10,7 @@
 #define FonctionActivation_h
 
 /**
-@brief La class Fonction_activation est une classe abstraite dont les classes héritées représenterons les différentes fonctions
+@brief La class FonctionActivation est une classe abstraite dont les classes héritées représenterons les différentes fonctions
 d'activation possibles. Cette classe possède les méthodes nécessaires à toute fonction d'activation pour être utilisée par l'algorithme
 du perceptron.
 */

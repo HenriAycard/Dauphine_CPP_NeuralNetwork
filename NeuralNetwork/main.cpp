@@ -39,17 +39,17 @@ static void testIrisGetInformations() {
 }
 
 static void testIrisNeuralNetwork(FonctionActivation * fa) {
-    NN1 * neural_network =  new NN1(4, fa, 3);
-    Apprentissage<Iris, sizeIris, NN1> app(neural_network);
-    app.apprendre_base(15000, 0.1);
+    NN1 * neural_Network =  new NN1(4, 3, fa);
+    Apprentissage<Iris, sizeIris, NN1> app(neural_Network);
+    app.apprendre_base(10000, 0.01);
     int evaluation = app.evaluer();
     cout << "Evaluation Iris NN1: " << evaluation << endl;
 }
 
 void testIrisNeuralNetwork2(FonctionActivation * fa) {
-    NN2 * neural_network = new NN2(4, 3, 3, fa);
-    Apprentissage<Iris, sizeIris, NN2> app(neural_network);
-    app.apprendre_base(10000, 0.1);
+    NN2 * neural_Network = new NN2(4, 3, 3, fa);
+    Apprentissage<Iris, sizeIris, NN2> app(neural_Network);
+    app.apprendre_base(10000, 0.01);
     int evaluation = app.evaluer();
 
     cout << "Evaluation Iris NN2: " << evaluation << endl;
@@ -60,24 +60,24 @@ static void testImageGetInformations() {
     for (int j = 0; j < 60000;j++)
     {
         Image i = Image(j);
-        cout << "Label name: " << to_string(i.get_label()) << endl;
+        //cout << "Label name: " << to_string(i.get_label()) << endl;
     }
     cout << "---------------------------------------" << endl;
 }
 
 static void testImageNeuralNetwork(FonctionActivation * fa) {
-    NN1 * neural_network = new NN1(784, fa, 10);
-    Apprentissage<Image, sizeImage, NN1> app(neural_network);
-    app.apprendre_base(15000, 0.1);
+    NN1 * neural_Network = new NN1(784, 10, fa);
+    Apprentissage<Image, sizeImage, NN1> app(neural_Network);
+    app.apprendre_base(100000, 0.1);
     int evaluation = app.evaluer();
 
     cout << "Evaluation Image NN1: " << evaluation << endl;
 }
 
 static void testImageNeuralNetwork2(FonctionActivation * fa) {
-    NN2 * neural_network = new NN2(784, 10, 10, fa);
-    Apprentissage<Image, sizeImage, NN2> app(neural_network);
-    app.apprendre_base(10000, 0.1);
+    NN2 * neural_Network = new NN2(784, 10, 10, fa);
+    Apprentissage<Image, sizeImage, NN2> app(neural_Network);
+    app.apprendre_base(100000, 0.1);
     int evaluation = app.evaluer();
 
     cout << "Evaluation Image NN2: " << evaluation << endl;
