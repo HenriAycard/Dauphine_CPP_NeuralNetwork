@@ -30,7 +30,7 @@ public:
     // ajouter les paramètres
     NN1();
 
-    NN1(int taille_input, Fonction_activation * fnc_activation, int nbr_perceptron);
+    NN1(int taille_input, FonctionActivation * fnc_activation, int nbr_perceptron);
 
     ~NN1();
 

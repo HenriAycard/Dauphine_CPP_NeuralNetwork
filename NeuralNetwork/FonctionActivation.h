@@ -6,15 +6,15 @@
 //  Copyright © 2021 AiEtquart. All rights reserved.
 //
 
-#ifndef Fonction_Activation_h
-#define Fonction_Activation_h
+#ifndef FonctionActivation_h
+#define FonctionActivation_h
 
 /**
 @brief La class Fonction_activation est une classe abstraite dont les classes héritées représenterons les différentes fonctions
 d'activation possibles. Cette classe possède les méthodes nécessaires à toute fonction d'activation pour être utilisée par l'algorithme
 du perceptron.
 */
-class Fonction_activation
+class FonctionActivation
 {
     public:
         /**

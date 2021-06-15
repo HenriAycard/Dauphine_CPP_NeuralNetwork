@@ -20,7 +20,7 @@ using namespace std;
  @brief Le constructeur initialise les poids du perceptron de manière aléatoire (par exemple en choisissant des valeurs
  entières entre -1 et 1 aléatoirement.
  */
-Perceptron::Perceptron(int input_size, Fonction_activation * fnc_activation, char label)
+Perceptron::Perceptron(int input_size, FonctionActivation * fnc_activation, char label)
 {
     this->fonction_activation = fnc_activation;
     this->label = label;
@@ -63,8 +63,6 @@ double Perceptron::forward(Input & input)
     double somme=this->get_poids(0);
     int i = 0;
     while (input[i] != -1) {
-        //double temp = this->get_poids(i+1);
-        //somme += temp * input[i];
         somme += this->get_poids(i+1) * input[i];
         i = i + 1;
     }

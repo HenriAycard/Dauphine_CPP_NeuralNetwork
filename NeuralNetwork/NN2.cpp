@@ -3,81 +3,121 @@
 //  NeuralNetwork
 //
 //  Created by Henri Aycard on 30/05/2021.
-//  Copyright © 2021 AiEtquart. All rights reserved.
+//  Copyright © 2021. All rights reserved.
 //
 #include "NN2.hpp"
-#include "Input_intermediaire.hpp"
+#include "InputIntermediaire.hpp"
 #include <iostream>
 #include <string>
+using namespace std;
 
 
 NN2::NN2()
 {
 }
 
-NN2::NN2(int taille_input, int nbr_cat, int nbr_perceptron_c, Fonction_activation * f)
-{
-    if (taille_input != 4 && taille_input != 784) {
-        throw std::string("Erreur dans la sélection de la taille d'input");
-    }
-    else {
-        if (nbr_cat != 10 && nbr_cat != 3) {
-            throw std::string("Erreur dans le nombre de catégorie");
-        }
-        else {
-            this->nbr_perceptron = nbr_cat;
-            this->nbr_perceptron_cachee = nbr_perceptron_c;
-            this->perceptron_list = new Perceptron[nbr_perceptron];
-            this->perceptron_cachee_list = new Perceptron_cachee[nbr_perceptron_c];
-            for (int i = 0; i < nbr_perceptron; i++) {
-                Perceptron p = Perceptron(taille_input, f, i);
-                this->perceptron_list[i] = p;
-            }
-            for (int i = 0; i < nbr_perceptron_c; i++) {
-                std::vector<Perceptron> couche_sortie =  std::vector<Perceptron>(); // on met quoi dedans ?
-                Perceptron_cachee p = Perceptron_cachee(taille_input, f, i, couche_sortie);
-                this->perceptron_cachee_list[i] = p;
-            }
-        }
-    }
-}
-
-
 NN2::~NN2()
 {
 }
 
-char NN2::evaluation(Input & input)
+/**
+ @param inputSize : un entier correspondant à la taille des inputs (par exemple 4 pour les fleurs et 784 pour les images)
+ @param nbrCategorie : entier correspondant au nombre de catégories (et donc le nombre de perceptrons de la couche de sortie)
+ @param nbrPerceptronC : entier correspondant au nombre de perceptrons dans la couche cachée
+ */
+NN2::NN2(int inputSize, int nbrCategorie, int nbrPerceptronC, FonctionActivation * f)
 {
-    double max = 0;
-    int indice_max = 0;
-    Input_intermediaire input_int(input.get_label());
-
-    for (int i = 0; i < this->nbr_perceptron_cachee; i++) {
-        double valeur = this->perceptron_cachee_list[i].forward(input);
-        input_int.add(valeur);
+    if (inputSize != 4 && inputSize != 784) {
+        throw string("Erreur : Taille de l input incorrect");
     }
-    for (int i = 0; i < this->nbr_perceptron; i++) {
-        double valeur = this->perceptron_list[i].forward(input_int);
-        if (valeur > max) {
-            max = valeur;
-            indice_max = i;
+    else {
+        if (nbrCategorie != 10 && nbrCategorie != 3) {
+            throw string("Erreur : Categorie nombre");
+        }
+        else {
+            this->nbrPerceptron = nbrCategorie;
+            this->nbrPerceptroncachee = nbrPerceptronC;
+            
+            this->lstPerceptron = new Perceptron[nbrPerceptron];
+            this->lstPerceptronCachee = new PerceptronCachee[nbrPerceptronC];
+            
+            /* Initalise la liste des Perceptrons */
+            for (int indice = 0; indice < nbrPerceptron; indice++) {
+                Perceptron p = Perceptron(inputSize, f, indice);
+                this->lstPerceptron[indice] = p;
+            }
+            
+            /* Initalise la liste des Perceptrons Cachee
+             Pour les perceptrons de la couche cachée, la label (qui n’aura pas vraiment le sens de catégorie)
+             correspondra à l’indice du perceptron dans le vecteur.
+            */
+            for (int indice = 0; indice < nbrPerceptronC; indice++) {
+                vector<Perceptron> couche_sortie =  vector<Perceptron>();
+                PerceptronCachee p = PerceptronCachee(inputSize, f, indice, couche_sortie);
+                this->lstPerceptronCachee[indice] = p;
+            }
         }
     }
-    return(std::to_string(indice_max)[0]);
 }
 
+/**
+ @param input : indice par référence
+ @brief Une fonction evaluation qui prend en paramètre un Input (de préférence une référence), et
+ qui renvoie son label (char dont la valeur est comprise entre 0 et 𝑟 − 1) évalué en
+ recherchant la plus grande valeur retournée par un des perceptrons de la couche de sortie.
+ L’évaluation des perceptrons de la couche cachée sera effectuée en premier, avec comme
+ entrée l’input. Par la suite, l’input intermédiaire sera donné en entrée des perceptrons de la couche de sortie, et
+ la catégorie retournée sera celle du perceptron de la couche de sortie qui a la plus grande valeur.
+ */
+char NN2::evaluation(Input & input)
+{
+    // Un InputIntermédiaire (correspondant à 𝒂(𝟏) = (𝑎1(1), … , 𝑎𝑡(1))) sera créé en
+    // ajoutant la valeur de chaque perceptron de la couche cachée à cet input intermédiaire.
+    InputIntermediaire inputInter(input.get_label());
+    
+    // l’input intermédiaire est donné en entrée des perceptrons de la couche de sortie grace a la fonction .forward()
+    for (int i = 0; i < this->nbrPerceptroncachee; i++) {
+        double valeur = this->lstPerceptronCachee[i].forward(inputInter);
+        inputInter.add(valeur);
+    }
+    // la catégorie retournée est celle du perceptron de la couche de sortie qui a la plus grande valeur.
+    double max = 0;
+    int maxIndice = 0;
+    double valeur = 0;
+    for (int i = 0; i < this->nbrPerceptron; i++) {
+        valeur = this->lstPerceptron[i].forward(inputInter);
+        if (valeur > max) {
+            max = valeur;
+            maxIndice = i;
+        }
+    }
+    return(to_string(maxIndice)[0]);
+}
+
+/**
+@brief Une fonction apprentissage qui prend en paramètre un Input (qui correspond à (𝒙𝑗, 𝑦𝑗)) et un double (correspondant au pas de gradient 𝜇) et qui va appliquer l’algorithme d’apprentissage pour cet input. Il suffit d’appliquer l’algorithme d' "evaluation()".
+Les valeurs 𝛿𝑙(2) et 𝛿𝑠(1) sont ensuite calculées (dans cet ordre) en faisant appel à la fonction membre calcul_delta des perceptrons de la couche de sortie (avec comme
+paramètre l’input intermédiaire correspondant à 𝒂(𝟏) = (𝑎1(1), … , 𝑎𝑡(1))) et la fonction membre calcul_delta des perceptrons de la couche cachée (avec comme paramètre 𝒙𝑗).
+Après cette étape, la fonction backprop de chaque perceptron de la couche cachée (avec comme paramètre 𝒙𝑗) et la fonction backprop de chaque perceptron de la couche de sortie (avec comme paramètre l’input intermédiaire correspondant à 𝒂(𝟏) = (𝑎1(1), … , 𝑎𝑡(1))) est appliquée pour mettre à jours les poids
+*/
 void NN2::apprentissage(Input & input, double mu)
 {
-    Input_intermediaire input_int(input.get_label());
-    for (int i = 0; i < this->nbr_perceptron; i++) {
-        this->perceptron_list[i].calcul_delta(input_int);
+    // Initialisation
+    // Un input intermédiaire (correspondant à 𝒂(𝟏) = (𝑎1(1), … , 𝑎𝑡(1))) est créé de la même manière que dans la fonction membre evaluation.
+    InputIntermediaire inputInter(input.get_label());
+    
+    
+    
+    for (int i = 0; i < this->nbrPerceptron; i++) {
+        // Les valeurs 𝛿𝑙(2) et 𝛿𝑠(1) sont ensuite calculées en faisant appel à la fonction membre calcul_delta des perceptrons de la couche de sortie avec comme paramètre 𝒙𝑗
+        this->lstPerceptron[i].calcul_delta(inputInter);
+        // La fonction backprop de chaque perceptron de la couche cachée (avec comme paramètre 𝒙𝑗) et la fonction backprop de chaque perceptron de la couche de sortie (avec comme paramètre l’input intermédiaire correspondant à 𝒂(𝟏) = (𝑎1(1), … , 𝑎𝑡(1))) est appliquée pour mettre à jours les poids
+        this->lstPerceptron[i].backprop(inputInter, mu);
     }
-    for (int i = 0; i < this->nbr_perceptron_cachee; i++) {
-        this->perceptron_cachee_list[i].calcul_delta(input);
-        this->perceptron_cachee_list[i].backprop(input, mu);
+    
+    for (int i = 0; i < this->nbrPerceptroncachee; i++) {
+        this->lstPerceptronCachee[i].calcul_delta(input);
+        this->lstPerceptronCachee[i].backprop(input, mu);
     }
-    for (int i = 0; i < this->nbr_perceptron; i++) {
-        this->perceptron_list[i].backprop(input_int, mu);
-    }
+
 }

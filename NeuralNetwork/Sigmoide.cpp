@@ -18,11 +18,13 @@ Sigmoide::~Sigmoide()
 {
 }
 
+// sig(x) = 1 / (1 + exp(-x))
 double Sigmoide::operator()(double nombre)
 {
     return 1 / (1 + exp(-nombre));
 }
 
+//sig'(x) = (1 - sig(x))
 double Sigmoide::prim(double nombre)
 {
     return (*this)(nombre) * (1 - (*this)(nombre));

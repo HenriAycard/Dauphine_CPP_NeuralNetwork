@@ -17,7 +17,7 @@ NN1::NN1()
 {
 }
 
-NN1::NN1(int taille_input, Fonction_activation * fnc_activation, int nbr_perceptron)
+NN1::NN1(int taille_input, FonctionActivation * fnc_activation, int nbr_perceptron)
 {
     if (taille_input != 4 && taille_input != 784) {
         throw string("Erreur size Input");
