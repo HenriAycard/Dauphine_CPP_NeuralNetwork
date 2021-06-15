@@ -13,7 +13,6 @@ Input::Input()
 {
 }
 
-
 Input::~Input()
 {
 }

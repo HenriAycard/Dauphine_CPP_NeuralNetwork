@@ -18,12 +18,12 @@ template <class T, int size, class N>
 class Apprentissage
 {
 private:
-    N * neural_network;
+    N * neuralNetwork;
     
 public:
     Apprentissage();
 
-    Apprentissage(N * neural_net);
+    Apprentissage(N * neural_Network);
     
     void apprendre_base(int K, double mu);
 
@@ -36,9 +36,9 @@ Apprentissage<T, size, N>::Apprentissage()
 }
 
 template<class T, int size, class N>
-Apprentissage<T, size, N>::Apprentissage(N * neural_net)
+Apprentissage<T, size, N>::Apprentissage(N * neural_Network)
 {
-    this->neural_network = neural_net;
+    this->neuralNetwork = neural_Network;
 }
 
 template<class T, int size, class N>
@@ -48,11 +48,11 @@ void Apprentissage<T, size, N>::apprendre_base(int K, double mu)
         for (int i = 0; i < K; ++i) {
             int rand_number = rand() % size;
             T input = T(rand_number);
-            (this->neural_network)->apprentissage(input, mu);
+            (this->neuralNetwork)->apprentissage(input, mu);
         }
     }
     else {
-        throw "Paramètre K invalide.";
+        throw "Error: Paramètre K";
     }
 }
 
@@ -65,15 +65,17 @@ void Apprentissage<T, size, N>::apprendre_base(int K, double mu)
 template<class T, int size, class N>
 int Apprentissage<T, size, N>::evaluer()
 {
-    int nbreEvaluate = 0;
+    int nbrEvaluation = 0;
     for (int index = 0; index < size; ++index) {
         T input = T(index);
-        char label_file = input.get_label();
-        char label_evalue = (this->neural_network)->evaluation(input) - 48;
-        if (label_evalue == label_file) {
-            nbreEvaluate += 1;
+        
+        char labelFile = input.get_label();
+        char labelEvalue = (this->neuralNetwork)->evaluation(input) - 48;
+        
+        if (labelEvalue == labelFile) {
+            nbrEvaluation += 1;
         }
     }
-    return nbreEvaluate;
+    return nbrEvaluation;
 }
 #endif /* Apprentissage_hpp */

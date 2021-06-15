@@ -5,7 +5,7 @@
 //  Created by Henri Aycard on 05/03/2021.
 //  Copyright © 2021 AiEtquart. All rights reserved.
 //
-#include "Fonction_Activation.h"
+#include "FonctionActivation.h"
 
 #ifndef Tanh_hpp
 #define Tanh_hpp
@@ -17,7 +17,7 @@
  Cette class surdéfinie naturellement l'opérateur () et la fonction prim
  */
 
-class Tanh: public Fonction_activation {
+class Tanh: public FonctionActivation {
 public:
     Tanh();
     

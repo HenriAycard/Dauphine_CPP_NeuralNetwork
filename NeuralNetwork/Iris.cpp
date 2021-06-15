@@ -17,6 +17,7 @@ using namespace std;
 
 Iris::Iris(int indiceFleur) :Input()
 {
+    // cout << "Path: " << path_file << " Pour modifier changer la variable path_file du fichier Iris.cpp" << endl;
     if (indiceFleur <= 149 && indiceFleur >= 0) {
         try {
             string pathFile = string(path_file) + "iris" + to_string(indiceFleur);
@@ -39,7 +40,6 @@ Iris::Iris(int indiceFleur) :Input()
                 desctabchar[i] = descriptionString.substr(0, descriptionString.find(delimiter));
                 // On supprime le resultat trouvé (délimiteur inclus) pour procéder aux extractions suivantes
                 descriptionString.erase(0, descriptionString.find(delimiter) + 1);
-                //cout << desctabchar[i] << endl;
             }
             
             /*
@@ -65,7 +65,7 @@ Iris::Iris(int indiceFleur) :Input()
         }
     }
     else {
-        throw "Invalid parameter : indiceFleur";
+        throw "Error : Invalid parameter indiceFleur";
     }
 }
 

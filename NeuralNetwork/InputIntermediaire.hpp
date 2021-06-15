@@ -18,7 +18,12 @@
 class InputIntermediaire : public Input
 {
 private :
-    std::vector<double> valIntermediaires;
+    /**
+     @brief La classe Input_intermediaire va servir à stocker les valeurs intermédiaires
+     𝒂(𝟏) = (𝑎1, … , 𝑎𝑡) à la sortie des perceptrons de la couche cachée. Elle descend de la classe Input. Elle possède un champ
+     qui va contenir des valeurs réelles (double), qui sera de préférence un vecteur (vector).
+     */
+    std::vector<double> valeurIntermediaire;
 public:
     InputIntermediaire();
 

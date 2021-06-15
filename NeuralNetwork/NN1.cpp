@@ -3,7 +3,7 @@
 //  NeuralNetwork
 //
 //  Created by Henri Aycard on 05/03/2021.
-//  Copyright © 2021 AiEtquart. All rights reserved.
+//  Copyright © 2021. All rights reserved.
 //
 
 #include "NN1.hpp"
@@ -17,10 +17,15 @@ NN1::NN1()
 {
 }
 
-NN1::NN1(int taille_input, Fonction_activation * fnc_activation, int nbr_perceptron)
+/**
+ @param inputSize : un entier correspondant à la taille des inputs (4 pour les fleurs et 784 pour les images)
+ @param nbrPerceptron : un entier correspondant au nombre de catégories (donc le nombre de perceptrons compris entre 3 et 10)
+ @param fonctionActivation :  une fonction d'activation (Tanh ou Sigmoide) pour initialiser les Perceptrons
+ */
+NN1::NN1(int inputSize, int nbrPerceptron, FonctionActivation * fonctionActivation)
 {
-    if (taille_input != 4 && taille_input != 784) {
-        throw string("Erreur size Input");
+    if (inputSize != 4 && inputSize != 784) {
+        throw string("Erreur : Taille de l input");
     }
     else {
         /*
@@ -28,15 +33,16 @@ NN1::NN1(int taille_input, Fonction_activation * fnc_activation, int nbr_percept
          Dans les problèmes de classification, nous considerons plus de 2 catégories
          Donc 3 pour les fleurs et 10 pour les images
          */
-        if (nbr_perceptron != 10 && nbr_perceptron != 3) {
-            throw string("Erreur category name");
+        if (nbrPerceptron != 3 && nbrPerceptron != 10) {
+            throw string("Erreur : Nom de Categorie");
         }
         else {
-            this->nbr_perceptron = nbr_perceptron;
-            this->perceptron_list = new Perceptron[nbr_perceptron];
-            for (int i = 0; i < nbr_perceptron; ++i) {
-                Perceptron p = Perceptron(taille_input, fnc_activation, i);
-                this->perceptron_list[i] = p;
+            this->nbrPerceptron = nbrPerceptron;
+            this->lstPerceptron = new Perceptron[nbrPerceptron];
+            
+            for (int index = 0; index < nbrPerceptron; ++index) {
+                Perceptron p = Perceptron(inputSize, fonctionActivation, index);
+                this->lstPerceptron[index] = p;
             }
         }
     }
@@ -51,11 +57,11 @@ char NN1::evaluation(Input & input)
 {
     double max = 0;
     int indice_max = 0;
-    for (int i = 0; i < this->nbr_perceptron; ++i) {
-        double valeur = this->perceptron_list[i].forward(input);
+    for (int index = 0; index < this->nbrPerceptron; ++index) {
+        double valeur = this->lstPerceptron[index].forward(input);
         if (valeur >= max) {
             max = valeur;
-            indice_max = i;
+            indice_max = index;
         }
     }
     return(to_string(indice_max)[0]);
@@ -63,7 +69,7 @@ char NN1::evaluation(Input & input)
 
 void NN1::apprentissage(Input & input, double mu)
 {
-    for (int i = 0; i < this->nbr_perceptron; ++i) {
-        this->perceptron_list[i].backprop(input, mu);
+    for (int i = 0; i < this->nbrPerceptron; ++i) {
+        this->lstPerceptron[i].backprop(input, mu);
     }
 }

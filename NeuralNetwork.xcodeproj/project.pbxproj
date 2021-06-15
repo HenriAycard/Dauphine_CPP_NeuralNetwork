@@ -41,7 +41,7 @@
 		83149B7425F269D7004E40D1 /* Image.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Image.hpp; sourceTree = "<group>"; };
 		83149B7625F2713F004E40D1 /* Iris.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Iris.cpp; sourceTree = "<group>"; };
 		83149B7725F2713F004E40D1 /* Iris.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Iris.hpp; sourceTree = "<group>"; };
-		83149B7925F2779E004E40D1 /* Fonction_Activation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fonction_Activation.h; sourceTree = "<group>"; };
+		83149B7925F2779E004E40D1 /* FonctionActivation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FonctionActivation.h; sourceTree = "<group>"; };
 		83149B7A25F277CC004E40D1 /* Perceptron.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Perceptron.cpp; sourceTree = "<group>"; };
 		83149B7B25F277CC004E40D1 /* Perceptron.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Perceptron.hpp; sourceTree = "<group>"; };
 		83149B7D25F27836004E40D1 /* Tanh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tanh.cpp; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				83149B6925F267EE004E40D1 /* main.cpp */,
-				83149B7925F2779E004E40D1 /* Fonction_Activation.h */,
+				83149B7925F2779E004E40D1 /* FonctionActivation.h */,
 				83149B7325F269D7004E40D1 /* Image.cpp */,
 				83149B7425F269D7004E40D1 /* Image.hpp */,
 				83149B7625F2713F004E40D1 /* Iris.cpp */,

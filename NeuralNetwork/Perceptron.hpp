@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "Input.hpp"
-#include "Fonction_activation.h"
+#include "FonctionActivation.h"
 
 class Perceptron
 {
@@ -24,13 +24,13 @@ class Perceptron
  */
 protected:
     double * poids;
-    Fonction_activation * fonction_activation;
+    FonctionActivation * fonctionActivation;
     double delta; // stocke la valeur de 𝛿𝑘−1
     char label;
 
 public:
 
-        Perceptron(int input_size, Fonction_activation * fnc_activation, char label);
+        Perceptron(int inputSize, FonctionActivation * fonctionActivation, char label);
     
         Perceptron();
     
